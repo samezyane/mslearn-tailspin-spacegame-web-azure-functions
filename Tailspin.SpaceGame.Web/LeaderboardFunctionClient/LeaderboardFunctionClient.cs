@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
-using System.Net;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace TailSpin.SpaceGame.Web
 {
@@ -15,9 +15,9 @@ namespace TailSpin.SpaceGame.Web
 
         async public Task<LeaderboardResponse> GetLeaderboard(int page, int pageSize, string mode, string region)
         {
-            using (WebClient webClient = new WebClient())
+            using (HttpClient webClient = new HttpClient())
             {
-                string json = await webClient.DownloadStringTaskAsync($"{this._functionUrl}?page={page}&pageSize={pageSize}&mode={mode}&region={region}");                
+                string json = await webClient.GetStringAsync($"{this._functionUrl}?page={page}&pageSize={pageSize}&mode={mode}&region={region}");                
                 return JsonSerializer.Deserialize<LeaderboardResponse>(json);
             }
         }
