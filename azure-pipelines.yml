@@ -83,7 +83,6 @@ stages:
             artifact: drop
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
-            retryCountOnTaskFailure: 10
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppName)'
@@ -108,7 +107,7 @@ stages:
                 [
                   {
                     "name": "AppSettings__LeaderboardFunctionUrl",
-                    "value": "http://$(LeaderboardAppName)/api/LeaderboardFunction",
+                    "value": "http://$(LeaderboardAppName).azurewebsites.net/api/LeaderboardFunction",
                     "slotSetting": false
                   }
                 ]
